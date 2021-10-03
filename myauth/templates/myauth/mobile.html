@@ -1,0 +1,174 @@
+{% extends 'myauth/base/base.html' %}
+{% block content %}
+    <style>
+        body {
+            background-color: #E7EDEE;
+        }
+
+        .header {
+            width: 100%;
+            height: 65px;
+            background-color: blue;
+            border-bottom: solid 4px orange;
+        }
+
+        .panel {
+            width: 95%;
+            height: 400px;
+            background-color: white;
+            position: relative;
+            top: 40px;
+            border: solid 1px #eeeeee;
+            border-top: solid 2px blue;
+
+            /* border-bottom-left-radius:50px;
+             border-bottom-right-radius:50px; */
+
+             /* border-top-left-radius:20px; */
+            /*border-top-right-radius:50px;*/
+        }
+
+        .rightt {
+
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            opacity: 0.7;
+            z-index: 99;
+            color: grey;
+        }
+        .kwek{
+            color:white;
+            position:relative;
+            right:21%;
+            top:15px;
+        }
+        .footer{
+            width:94.9%;
+            height:100px;
+            background-color:white;
+            border-bottom: solid 4px orange; 
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+
+
+
+
+        .borderless td,
+        .borderless th {
+            border: none;
+        }
+    </style>
+    <script>
+        $(function () {
+            $(".forgot").click(function () {
+                $.confirm({
+                    title: 'Password Recovery',
+                    type: 'blue',
+                    content: '' +
+                        '<form action="" class="formName">' +
+                        '<div class="form-group">' +
+                        '<label></label>' +
+                        '<input type="text" placeholder="Your email" class="name form-control" required>' +
+                        '</div>' +
+                        '</form>',
+                    buttons: {
+                        formSubmit: {
+                            text: 'Submit',
+                            btnClass: 'btn-blue',
+                            action: function () {
+                                var message = this.$content.find('.name').val();
+
+                                if (!message) {
+                                    $.alert('Sorry, please enter your email address');
+                                    return false;
+                                } else {
+                                    $("body").mLoading({
+                                        text: "Sending email...",
+                                    });
+
+                                    //$.toast('Sending SMS please wait ...');
+
+
+                                    setTimeout(function () {
+                                        $.post("moderator/passwordmail.html", {
+
+                                            email: message
+                                            // studid:studid
+
+                                        }, function (data) {
+                                            $("body").mLoading('hide');
+                                            swal("success", data, "success");
+                                        });
+                                    }, 1000);
+
+
+                                }
+
+                            }
+                        },
+                        cancel: function () {
+                            //close
+                        },
+                    },
+                    onContentReady: function () {
+                        // bind to events
+                        var jc = this;
+                        this.$content.find('form').on('submit', function (e) {
+                            // if the user submits the form by pressing enter in the field.
+                            e.preventDefault();
+                            jc.$$formSubmit.trigger('click'); // reference the button and click it
+                        });
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <center>
+        <div class="header">
+            <span class="kwek">KWEK'S LOAN
+                PLATFORM</span>
+            <!-- <button type="button" style="width:8%;height:40px;position:relative;left:22.5%;top:10px;" disabled class="login btn btn-success teal">Sign in</button> -->
+        </div>
+
+
+        <div class="panel ms-auto justify-content-center centered">
+
+
+
+            <div class="right">
+                <center>
+                    <br><img src="images/main.png" width="80" height="80"><br><br>
+                    <div class="form-group">
+                        <input type="username" id="username" style="width:70%;" class="form-control"
+                            id="exampleInputEmail1" placeholder="ID Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" style="width:70%;" class="form-control"
+                            id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <hr style="width:40%;">
+                    <button type="button" style="width:70%;height:50px;" class="login btn btn-outline-warning">Sign
+                        in</button><br>
+                    <!-- <button type="button" style="width:70%;height:50px;position:relative;top:5px;font:bold 20px arial;" class="register btn btn-outline-warning orange">Register</button>--><br><br>
+                    <h6 class="forgot" style="cursor:pointer;">Forgot password?</h6>
+                    <img src="images/loading.gif" width="20px" height="20px" class="loader" style="display:none;">
+                </center>
+            </div>
+            <div class="rightt">
+                Kwek's Loan Platform
+            </div>
+        </div>
+        <center>
+            <div class="footer">
+                <center><br><br><b style="color:black;position:relative;top:5px;">&copy 2020 | Kwek's Loan Platform</b>
+                </center>
+            </div><br><br>
+        </center>
+
+{% endblock %}

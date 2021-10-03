@@ -1,0 +1,50 @@
+{% extends 'myauth/base/signbase.html' %}
+{% load static %}
+{% block content %}
+<body>
+        <!-- Loader -->
+        <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div>
+        <!--End Loader -->
+
+    <center>
+        <div class="header">
+            <span style="color:white;position:relative;right:22.5%;top:15px;" class="kwek">KWEKLOAN PLATFORM</span>
+            <!-- <button type="button" style="width:8%;height:40px;position:relative;left:22.5%;top:10px;" disabled class="login btn btn-warning ">Sign in</button> -->
+
+            <div class="back-to-home rounded d-none d-sm-block shadow-sm">
+                <a href="../homepage.html" class="btn btn-icon btn-soft-primary "><i data-feather="home" class="icons"></i></a>
+            </div>
+
+        </div>
+
+
+        <div class="panel ms-auto justify-content-center centered">
+
+
+
+        
+            <div class="right force-overflow" id="style">
+            <form action="." method="post"  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ form1.as_p }}
+
+                <hr style="width:70%;">
+                <button type="submit" style="width:70%;height:50px;" class="login btn btn-outline-warning">Sign
+                    up</button><br><br>
+                <p class="text-secondary">Already have an account <a class="clicktoSignin" href="../loginPage/laptop.html" style="text-decoration: none;">Sign in</a></p>
+                <img src="{% static 'images/loading.gif' %}" width="20px" height="20px" class="loader" style="display:none;">
+            </form>
+
+            </div>
+        
+
+        </div>
+        {% endblock %}

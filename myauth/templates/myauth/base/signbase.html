@@ -1,0 +1,354 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>KwekLoan Platform</title>
+    <script src="{% static 'moderator/js/jquery.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'moderator/bootstrap4/css/bootstrap.min.css' %}">
+    <script src="{% static 'moderator/bootstrap4/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'moderator/jqueryconfirm/js/jquery-confirm.js' %}"></script>
+    <link href="{% static 'moderator/jqueryconfirm/css/jquery-confirm.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'moderator/mloading/src/jquery.mloading.css' %}">
+    <script src="{% static 'moderator/mloading/src/jquery.mloading.js' %}"></script>
+
+        <!-- Icons -->
+        <link href="{% static 'css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+        <!-- Main Css -->
+        <!-- <link href="../addons/css/style.css" rel="stylesheet" type="text/css" id="theme-opt" /> -->
+        <link href="{% static 'css/colors/default.css' %}" rel="stylesheet" id="color-opt">
+
+
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+            background-color: #E7EDEE;
+        }
+
+        .header {
+            width: 100%;
+            height: 65px;
+            background-color: blue;
+            border-bottom: solid 4px orange;
+        }
+
+        .panel {
+            width: 60.2%;
+            height: 460px;
+            background-color: white;
+            position: relative;
+            top: 40px;
+            border: solid 1px #eeeeee;
+            border-top: solid 2px blue;
+
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 100px;
+
+            /*  border-top-left-radius:20px;*/
+            /*border-top-right-radius:50px;*/
+        }
+
+        .footer {
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+
+            /* border-bottom:solid 1px teal; */
+        }
+
+        .left {
+            width: 50%;
+            position: relative;
+            height: 400px;
+            background-color: white;
+            float: left;
+            top: 40px;
+            padding: 20px;
+        }
+
+        .right {
+            width: 50%;
+            height: 400px;
+            position: relative;
+            background-color: white;
+            float: left;
+            top: 40px;
+            border-left: solid 1px #E7EDEE;
+            overflow-y: scroll;
+        }
+        .btn:hover{
+            color: white;
+        }
+
+        .fold {
+
+            background: blue;
+            color: white;
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            height: 35px;
+            padding: 5px;
+            position: absolute;
+            top: -25px;
+            left: -4.2%;
+            text-decoration: none;
+            box-shadow: 2px 1px 5px grey;
+        }
+
+        .fold:before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-left: 16px solid transparent;
+            border-right: 0px solid transparent;
+            border-top: 20px solid blue;
+            position: absolute;
+            left: 0%;
+            top: 35px;
+
+        }
+
+        .borderless td,
+        .borderless th {
+            border: none;
+        }
+
+        .kwek {
+            font-family: 'Roboto' sans-serif;
+        }
+
+        .textAlignLeft {
+            position: relative;
+            right: 99px !important;
+        }
+
+        .gender,
+        .mobile {
+            position: relative;
+            right: 110px !important;
+        }
+
+        .title {
+            position: relative;
+            right: 120px !important;
+        }
+
+        .email,
+        .address {
+            position: relative;
+            right: 116px !important;
+        }
+
+        .dateofbirth {
+            position: relative;
+            right: 90px !important;
+        }
+
+        .address {
+            position: relative;
+            right: 108px !important;
+        }
+
+        .workingstatues, .uploadpicture {
+            position: relative;
+            right: 78px !important;
+        }
+        .uploadpicture {
+            position: relative;
+            right: 86px !important;
+        }
+        .description{
+            position: relative;
+            right: 96px !important;
+        }
+        .uploadcards{
+            position: relative;
+            right: 32px !important;
+        }
+        .password{
+            position: relative;
+            right: 102px !important;
+        }
+        .confirmpassword{
+            position: relative;
+            right: 72px !important;
+        }
+
+        .takefile {
+            height: 80px;
+            border: 2px dashed blue;
+            width: 70%;
+            padding: 10px;
+
+        }
+        .takefile:hover {
+            background-color: aliceblue;
+            color: orange;
+            border: 2px dashed orange;
+
+        }
+
+        .takefile p {
+            width: 70%;
+            height: 70%;
+            text-align: center;
+            line-height: 170px;
+            
+            font-family: 'Roboto'sans-serif;
+        }
+
+        .takefile1 {
+            height: 80px;
+            border: 2px dashed blue;
+            width: 70%;
+            padding: 10px;
+
+        }
+        .takefile1:hover {
+            background-color: aliceblue;
+            color: orange;
+            border: 2px dashed orange;
+
+        }
+
+        .takefile1 p {
+            width: 70%;
+            height: 70%;
+            text-align: center;
+            line-height: 170px;
+            
+            font-family: 'Roboto'sans-serif;
+        }
+
+        #drag {
+            font-family: 'Roboto'sans-serif;
+            font-size: 12px;
+            color: blue;
+            position: relative;
+            bottom: 70px;
+        }
+
+        #drag:hover {
+
+            color: orange;
+            cursor: pointer;
+        }
+
+        #drag1 {
+            font-family: 'Roboto'sans-serif;
+            font-size: 12px;
+            color: blue;
+            position: relative;
+            bottom: 70px;
+        }
+
+        #drag1:hover {
+
+            color: orange;
+            cursor: pointer;
+        }
+
+        #input{
+            position: relative;
+            left: 5%;
+            outline-style: hidden;
+            width: 90%;
+            color: blue;
+        }
+        #input:hover{
+            color: orange;
+            cursor: pointer;
+        }
+
+        #input1{
+            position: relative;
+            left: 5%;
+            outline-style: hidden;
+            width: 90%;
+            color: blue;
+        }
+        #input1:hover{
+            color: orange;
+            cursor: pointer;
+        }
+
+        .clicktoSignin{
+            text-decoration: none;
+            color: blue;
+            font-family: 'Roboto' sans-serif;
+            font-weight: bold;
+        }
+        .clicktoSignin:hover{
+            color: orange;
+        }
+        .btn-icon{
+            background-color: blue !important;
+            position: relative;
+            left: 38%;
+            top: 82px;
+        }
+        .btn-icon:hover{
+            background-color: orange !important;
+            border: solid 1px orange !important;
+        }
+        .icons{
+            color: white;
+        }
+        .icons:hover{
+            color: aliceblue;
+        }  
+        #style::-webkit-scrollbar{
+            width: 8px;
+            background-color: white;
+        }
+        #style::-webkit-scrollbar-thumb{
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px orange;
+            border-radius: 10px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+
+
+{% block content %}
+{% endblock %}
+
+
+<center>
+    <div class="footer" style="width:60%;height:100px;background-color:white;border-bottom: solid 4px orange; ">
+        <center><br><br><b style="color:black;position:relative;top:5px;">&copy 2021 | KwekLoan Platform</b>
+        </center>
+    </div>
+</center>
+
+<script src="{% static 'moderator/sweetalert/sweetalert.js' %}"></script>
+<link rel="stylesheet" href="{% static 'moderator/sweetalert/sweetalert.css' %}">
+
+<!-- javascript -->
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+
+<!-- Icons -->
+<script src="{% static 'js/feather.min.js' %}"></script>
+<script src="https://unicons.iconscout.com/release/v2.1.9/script/monochrome/bundle.js"></script>
+<!-- Main Js -->
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+/* Approve Button */
+.approve{
+    transition: all 0.9s ease 0s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+
+}
+.approve:hover{
+    background-color: rgb(39, 165, 43) !important;
+    transform: translateY(-4px);
+    box-shadow: 0px 3px 3px rgb(20, 189, 118);
+    border: none;
+
+}
+/* Denial Button */
+.denial{
+    transition: all 0.9s ease 0s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+
+}
+.denial:hover{
+    background-color: rgb(253, 24, 36) !important;
+    transform: translateY(-4px);
+    box-shadow: 0px 3px 3px rgb(253, 24, 36);
+    border: none;
+
+}
+/* Credited Button */
+.credited{
+    transition: all 0.9s ease 0s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+
+}
+.credited:hover{
+    background-color: rgb(255, 163, 26) !important;
+    transform: translateY(-4px);
+    box-shadow: 0px 3px 3px rgb(255, 163, 26);
+    border: none;
+
+}

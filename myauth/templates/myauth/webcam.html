@@ -1,0 +1,93 @@
+{%load static %}
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to capture picture from webcam with Webcam.js</title>
+    <script src="{% static 'moderator/js/jquery.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'moderator/bootstrap4/css/bootstrap.min.css' %}">
+    <script src="{% static 'moderator/bootstrap4/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'moderator/jqueryconfirm/js/jquery-confirm.js' %}"></script>
+    <link href="{% static 'moderator/jqueryconfirm/css/jquery-confirm.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'moderator/mloading/src/jquery.mloading.css' %}">
+    <script src="{% static 'moderator/mloading/src/jquery.mloading.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+</head>
+<body>
+    <!-- CSS -->
+    <style>
+    #my_camera{
+        width: 320px;
+        height: 240px;
+        border: 1px solid black;
+    }
+	</style>
+    <form id="webcamsubmit">
+        {% csrf_token %}
+        <div id="my_camera"></div>
+        <input type=submit value="Take Snapshot">
+    </form>
+    <div id="results" ></div>
+	
+	<!-- Webcam.min.js -->
+    <script type="text/javascript" src="{% static 'assets/js/webcam.min.js' %}"></script>
+
+	<!-- Configure a few settings and attach camera -->
+	<script language="JavaScript">
+		Webcam.set({
+			width: 320,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+		Webcam.attach( '#my_camera' );
+	</script>
+	<!-- A button for taking snaps -->
+	
+	<!-- Code to handle taking the snapshot and displaying it locally -->
+	<script language="JavaScript">
+
+		$('#webcamsubmit').on('submit', function(e){
+            e.preventDefault();
+			
+			// take snapshot and get image data
+			Webcam.snap( function(data_uri) {
+				// display results in page
+				document.getElementById('results').innerHTML = 
+					'<img id="imageprev" src="'+data_uri+'"/>';
+                
+                const jkm = data_uri;
+
+                var base64image = document.getElementById("imageprev").src;
+                console.log("sdfasdfasdf   " + base64image);
+                            
+
+            console.log("asdkfhaskdjf "+jkm);
+            $.ajax({
+                type:'POST',
+                url:"{% url 'auth:webcamlogin'%}",
+                dateType:'json',
+                data: {'myimage': base64image,
+                'csrfmiddlewaretoken': $('input[name = csrfmiddlewaretoken]').val(),
+                },
+                        
+                success: function (data) {
+                      console.log(data)
+                },
+                failure: function() {
+                    
+                }
+            });
+		});
+    } );
+	</script>
+	
+</body>
+
+<script src="{% static 'moderator/sweetalert/sweetalert.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'moderator/sweetalert/sweetalert.css' %}">
+</html>
